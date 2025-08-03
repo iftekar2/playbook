@@ -77,7 +77,7 @@ class _WelcomepageState extends State<Welcomepage> {
       children: [
         Container(
           width: 600,
-          height: 500,
+          height: 490,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), // Adjust the radius
             image: DecorationImage(
@@ -87,7 +87,7 @@ class _WelcomepageState extends State<Welcomepage> {
           ),
         ),
 
-        SizedBox(height: 20),
+        SizedBox(height: 15),
         Text(
           carouselItem.title,
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
@@ -122,6 +122,55 @@ class _WelcomepageState extends State<Welcomepage> {
                 },
               ),
             ),
+
+            SizedBox(
+              height: 10,
+            ), // Adding space between the carousel and the button
+            SizedBox(
+              width: 300,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Log In",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              ),
+            ),
+            SizedBox(height: 20),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: "Don't have an account? ",
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black, // Specify a color for the default text
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "Sign Up",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    // Wrap the TextSpan in a tap gesture recognizer
+                    // recognizer: TapGestureRecognizer()
+                    //   ..onTap = () {
+                    //     // Navigate to the SignUpPage when the text is tapped
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const SignUpPage(),
+                    //       ),
+                    //     );
+                    //   },
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 40),
           ],
         ),
       ),
