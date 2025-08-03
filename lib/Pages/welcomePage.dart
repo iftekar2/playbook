@@ -130,7 +130,10 @@ class _WelcomepageState extends State<Welcomepage> {
               width: 300,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 child: Text(
                   "Log In",
                   style: TextStyle(
@@ -139,7 +142,6 @@ class _WelcomepageState extends State<Welcomepage> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               ),
             ),
             SizedBox(height: 20),

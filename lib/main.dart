@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/Pages/LoginPage.dart';
 import 'package:playbook/Pages/homePage.dart';
 import 'package:playbook/Pages/welcomePage.dart';
 
@@ -16,6 +17,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Playbook',
       home: Welcomepage(),
+      routes: {
+        "/home": (context) => Homepage(),
+        "/welcome": (context) => Welcomepage(),
+        "/login": (context) => Loginpage(),
+      },
     );
   }
 }
