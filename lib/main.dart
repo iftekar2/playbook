@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/Pages/LoginPage.dart';
 import 'package:playbook/Pages/SignupPage.dart';
+import 'package:playbook/Pages/forgotPassword.dart';
 import 'package:playbook/Pages/homePage.dart';
 import 'package:playbook/Pages/welcomePage.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         "/welcome": (context) => Welcomepage(),
         "/login": (context) => Loginpage(),
         "/signup": (context) => SignupPage(),
+        "/forgotPassword": (context) => Forgotpassword(),
       },
     );
   }

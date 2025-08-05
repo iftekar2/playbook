@@ -1,5 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:playbook/Pages/SignupPage.dart';
 
 // Carousel Items that will be displayed in the welcome page
 class CarouselItem {
@@ -158,16 +161,16 @@ class _WelcomepageState extends State<Welcomepage> {
                     text: "Sign Up",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                     // Wrap the TextSpan in a tap gesture recognizer
-                    // recognizer: TapGestureRecognizer()
-                    //   ..onTap = () {
-                    //     // Navigate to the SignUpPage when the text is tapped
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const SignUpPage(),
-                    //       ),
-                    //     );
-                    //   },
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        // Navigate to the SignUpPage when the text is tapped
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupPage(),
+                          ),
+                        );
+                      },
                   ),
                 ],
               ),

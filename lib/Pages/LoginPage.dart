@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:playbook/Components/GooglButton.dart';
 import 'package:playbook/Pages/SignupPage.dart';
+import 'package:playbook/Pages/forgotPassword.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -139,9 +140,17 @@ class _LoginpageState extends State<Loginpage> {
             SizedBox(height: 10),
             Align(
               alignment: Alignment.bottomRight,
-              child: Text(
-                "Forgot Password?",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Forgotpassword()),
+                  );
+                },
+                child: Text(
+                  "Forgot Password?",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                ),
               ),
             ),
 
