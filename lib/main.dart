@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:playbook/Pages/LoginPage.dart';
 import 'package:playbook/Pages/SignupPage.dart';
@@ -5,7 +6,10 @@ import 'package:playbook/Pages/forgotPassword.dart';
 import 'package:playbook/Pages/homePage.dart';
 import 'package:playbook/Pages/welcomePage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
