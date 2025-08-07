@@ -104,36 +104,47 @@ class _SignupPageState extends State<SignupPage> {
                   }
                   return null;
                 },
+
                 controller: nameController,
+                style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
-                  hint: Text(
-                    "Enter your name",
-                    style: TextStyle(color: Color(0xff4d5152), fontSize: 18),
+                  // Use hintText and hintStyle
+                  hintText: "Enter your name",
+                  hintStyle: const TextStyle(
+                    color: Color(0xff4d5152),
+                    fontSize: 18,
                   ),
-                  // Set the default border color
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Colors.grey, // Default border color
-                    ),
-                  ),
-                  // Set the border color when the text field is focused
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Colors.grey, // Focused border color
-                    ),
-                  ),
-                  // You can also add enabledBorder for consistency
+
+                  // Default border for all enabled states
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(
-                      color: Colors.grey, // Enabled border color
+                      color: Colors.grey,
+                      width: 1.0, // A consistent border width
                     ),
                   ),
-                ),
 
-                style: TextStyle(fontSize: 20),
+                  // Focused border
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                      width: 2.0, // A slightly thicker border when focused
+                    ),
+                  ),
+
+                  // Error border
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.red, width: 1.0),
+                  ),
+
+                  // Focused error border
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.red, width: 2.0),
+                  ),
+                ),
               ),
 
               SizedBox(height: 30),
