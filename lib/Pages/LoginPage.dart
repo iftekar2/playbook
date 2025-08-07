@@ -27,41 +27,28 @@ class _LoginpageState extends State<Loginpage> {
         email: emailController.text,
         password: passwordController.text,
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Login Successful", style: TextStyle(fontSize: 20)),
-        ),
-      );
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Homepage()),
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orange,
-            content: Text("Cold not find user", style: TextStyle(fontSize: 20)),
-          ),
-        );
+      String errorMessage = "An unknown error occurred.";
+      if (e.code == "auth/user-not-found") {
+        errorMessage = "Could not find a user with that email.";
       } else if (e.code == "wrong-password") {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orange,
-            content: Text("Wrong password", style: TextStyle(fontSize: 20)),
-          ),
-        );
+        errorMessage = "The password you entered is incorrect.";
+      } else if (e.code == "invalid-email") {
+        errorMessage = "The email address is not valid.";
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orange,
-            content: Text(
-              "An error occurred: ${e.message}",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        );
+        errorMessage = e.message ?? "An unexpected error occurred.";
       }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.orange,
+          content: Text(errorMessage, style: TextStyle(fontSize: 20)),
+        ),
+      );
     }
   }
 
