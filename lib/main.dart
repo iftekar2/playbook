@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:playbook/Pages/LoginPage.dart';
-import 'package:playbook/Pages/SignupPage.dart';
-import 'package:playbook/Pages/forgotPassword.dart';
+import 'package:playbook/Pages/Login/LoginPage.dart';
+import 'package:playbook/Pages/Login/SignupPage.dart';
+import 'package:playbook/Pages/Login/forgotPassword.dart';
 import 'package:playbook/Pages/homePage.dart';
 import 'package:playbook/Pages/welcomePage.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       title: 'Playbook',
-      home: Welcomepage(),
+      home: Homepage(),
       routes: {
         "/home": (context) => Homepage(),
         "/welcome": (context) => Welcomepage(),

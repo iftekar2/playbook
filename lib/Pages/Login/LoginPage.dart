@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/GooglButton.dart';
-import 'package:playbook/Components/googleAuth.dart';
-import 'package:playbook/Pages/SignupPage.dart';
-import 'package:playbook/Pages/forgotPassword.dart';
+import 'package:playbook/Components/Google/GooglButton.dart';
+import 'package:playbook/Components/Google/googleAuth.dart';
+import 'package:playbook/Pages/Login/SignupPage.dart';
+import 'package:playbook/Pages/Login/forgotPassword.dart';
 import 'package:playbook/Pages/homePage.dart';
 
 class Loginpage extends StatefulWidget {

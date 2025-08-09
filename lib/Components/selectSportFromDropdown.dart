@@ -9,7 +9,13 @@ class Selectsportfromdropdown extends StatefulWidget {
 }
 
 class _SelectsportfromdropdownState extends State<Selectsportfromdropdown> {
-  final differentSports = ["Football", "Basketball", "Soccer", "Baseball"];
+  final differentSports = [
+    "All",
+    "Football",
+    "Basketball",
+    "Soccer",
+    "Baseball",
+  ];
 
   // To store whichever sport the user selects
   String? selectedSport;

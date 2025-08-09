@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:playbook/Pages/SignupPage.dart';
+import 'package:playbook/Pages/Login/SignupPage.dart';
 
 // Carousel Items that will be displayed in the welcome page
 class CarouselItem {

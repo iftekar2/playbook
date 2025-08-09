@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/selectSportFromDropdown.dart';
+import 'package:playbook/Components/categoryCard.dart';
+import 'package:playbook/Components/homePageNav.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -13,7 +14,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
-      body: Column(children: [Selectsportfromdropdown()]),
+      body: Column(children: [Homepagenav(), Categorycard()]),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/GooglButton.dart';
-import 'package:playbook/Components/googleAuth.dart';
-import 'package:playbook/Pages/LoginPage.dart';
+import 'package:playbook/Components/Google/GooglButton.dart';
+import 'package:playbook/Components/Google/googleAuth.dart';
+import 'package:playbook/Pages/Login/LoginPage.dart';
 import 'package:playbook/Pages/homePage.dart';
 
 class SignupPage extends StatefulWidget {
@@ -30,11 +30,11 @@ class _SignupPageState extends State<SignupPage> {
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: emailController.text,
-              password: passwordController.text,
-            );
+        // UserCredential userCredential = await FirebaseAuth.instance
+        //     .createUserWithEmailAndPassword(
+        //       email: emailController.text,
+        //       password: passwordController.text,
+        //     );
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
