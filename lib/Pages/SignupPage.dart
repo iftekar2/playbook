@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:playbook/Components/GooglButton.dart';
+import 'package:playbook/Components/googleAuth.dart';
 import 'package:playbook/Pages/LoginPage.dart';
 import 'package:playbook/Pages/homePage.dart';
 
@@ -315,7 +316,11 @@ class _SignupPageState extends State<SignupPage> {
 
               SizedBox(height: 20),
               // This is using google button
-              Googlbutton(onPressed: () {}),
+              Googlbutton(
+                onPressed: () {
+                  GoogleAuth().signInWithGoogle(context);
+                },
+              ),
 
               SizedBox(height: 30),
               RichText(

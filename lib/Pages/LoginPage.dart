@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:playbook/Components/GooglButton.dart';
+import 'package:playbook/Components/googleAuth.dart';
 import 'package:playbook/Pages/SignupPage.dart';
 import 'package:playbook/Pages/forgotPassword.dart';
 import 'package:playbook/Pages/homePage.dart';
@@ -67,7 +68,7 @@ class _LoginpageState extends State<Loginpage> {
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "Sign Up",
+                  "Log In",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -261,7 +262,11 @@ class _LoginpageState extends State<Loginpage> {
 
               SizedBox(height: 40),
               // This is using google button
-              Googlbutton(onPressed: () {}),
+              Googlbutton(
+                onPressed: () {
+                  GoogleAuth().signInWithGoogle(context);
+                },
+              ),
 
               SizedBox(height: 30),
               RichText(
@@ -272,7 +277,7 @@ class _LoginpageState extends State<Loginpage> {
 
                   children: <TextSpan>[
                     TextSpan(
-                      text: "Sign Up",
+                      text: "Log In Up",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
