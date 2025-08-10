@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/SportData/NFLDatabase.dart';
+import 'package:playbook/Components/NFLData/NFLDatabase.dart';
 
 class Nfl extends StatefulWidget {
   Nfl({super.key});

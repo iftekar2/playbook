@@ -1,4 +1,4 @@
-import 'package:playbook/Components/SportData/NFLData.dart';
+import 'package:playbook/Components/NFLData/NFLData.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Nfldatabase {
