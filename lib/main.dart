@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       title: 'Playbook',
-      home: Homepage(),
+      home: Welcomepage(),
       routes: {
         "/home": (context) => Homepage(),
         "/welcome": (context) => Welcomepage(),

@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:playbook/Components/Google/GooglButton.dart';
 import 'package:playbook/Components/Google/googleAuth.dart';
+import 'package:playbook/Components/Google/googleAuthDatabase.dart';
 import 'package:playbook/Pages/Login/LoginPage.dart';
 import 'package:playbook/Pages/homePage.dart';
 
@@ -30,11 +31,22 @@ class _SignupPageState extends State<SignupPage> {
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
       try {
-        // UserCredential userCredential = await FirebaseAuth.instance
-        //     .createUserWithEmailAndPassword(
-        //       email: emailController.text,
-        //       password: passwordController.text,
-        //     );
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+
+        User? userDetail = userCredential.user;
+        if (userDetail != null) {
+          Map<String, dynamic> userInfoMap = {
+            "email": userDetail.email,
+            "name": nameController.text,
+            "id": userDetail.uid,
+          };
+          await Googleauthdatabase().addUser(userDetail.uid, userInfoMap);
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
