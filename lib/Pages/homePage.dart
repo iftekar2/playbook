@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/categoryCard.dart';
-import 'package:playbook/Components/homePageNav.dart';
+import 'package:playbook/Components/HomePage/categoryCard.dart';
+import 'package:playbook/Components/HomePage/homePageNav.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
