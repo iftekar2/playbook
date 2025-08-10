@@ -19,7 +19,6 @@ class _NflState extends State<Nfl> {
         padding: EdgeInsets.only(top: 10),
         child: Column(
           children: [
-            Text("NFL"),
             StreamBuilder(
               stream: nflDatabase.stream,
               builder: (context, snapshot) {
