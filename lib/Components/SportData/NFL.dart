@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/Components/SportData/NFLDatabase.dart';
 
-class Nfl extends StatelessWidget {
-  const Nfl({super.key});
+class Nfl extends StatefulWidget {
+  Nfl({super.key});
+
+  @override
+  State<Nfl> createState() => _NflState();
+}
+
+class _NflState extends State<Nfl> {
+  final nflDatabase = Nfldatabase();
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +17,39 @@ class Nfl extends StatelessWidget {
       appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 10),
-        child: Column(children: [Text("NFL")]),
+        child: Column(
+          children: [
+            Text("NFL"),
+            StreamBuilder(
+              stream: nflDatabase.stream,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  print('Error: ${snapshot.error}');
+
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+                if (!snapshot.hasData ||
+                    snapshot.data == null ||
+                    (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data found'));
+                }
+                final nflTeams = snapshot.data as List;
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: nflTeams.length,
+                    itemBuilder: (context, index) {
+                      final team = nflTeams[index];
+                      return ListTile(title: Text(team.team_name));
+                    },
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

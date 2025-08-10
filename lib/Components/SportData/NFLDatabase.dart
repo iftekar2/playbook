@@ -6,7 +6,7 @@ class Nfldatabase {
 
   // Read form the database
   final stream = Supabase.instance.client
-      .from("FNL")
+      .from("NFL")
       .stream(primaryKey: ['id'])
       .map((data) => data.map((dataMap) => NFLData.fromMap(dataMap)).toList());
 }
