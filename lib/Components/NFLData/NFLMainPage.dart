@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/NFLData/NFLCategoryCard.dart';
+import 'package:playbook/Components/NFLData/NFLTeamCategoryCard.dart';
 
-class Nflhomepage extends StatelessWidget {
-  const Nflhomepage({super.key});
+class Nflmainpage extends StatelessWidget {
+  const Nflmainpage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,5 +24,3 @@ class Nflhomepage extends StatelessWidget {
     );
   }
 }
-// https://www.espn.com/mlb/game/_/gameId/401696678
-// https://www.espn.com/nfl/game?gameId=401773026

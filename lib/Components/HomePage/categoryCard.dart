@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/Components/NBA.dart';
-import 'package:playbook/Components/NFLData/NFL.dart';
-import 'package:playbook/Components/NFLData/NFLCategoryCard.dart';
-import 'package:playbook/Components/NFLData/NFLHomePage.dart';
+import 'package:playbook/Components/NFLData/NFLTeamRepository.dart';
+import 'package:playbook/Components/NFLData/NFLTeamCategoryCard.dart';
+import 'package:playbook/Components/NFLData/NFLMainPage.dart';
 
 class Categorycard extends StatefulWidget {
   const Categorycard({super.key});
@@ -43,7 +43,7 @@ class _CategorycardState extends State<Categorycard> {
   // Map sport name to corresponding page widget
   final Map<String, Widget> sportPages = {
     // "Football": Nfl(),
-    "Football": Nflhomepage(),
+    "Football": Nflmainpage(),
     "Basketball": Nba(),
     // "Soccer": FIFA(),
     // "Baseball": MLB(),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/NFLData/NFLDatabase.dart';
+import 'package:playbook/Components/NFLData/NFLTeamInformation.dart';
 
-class Nfl extends StatefulWidget {
-  Nfl({super.key});
+class Nflteamrepository extends StatefulWidget {
+  Nflteamrepository({super.key});
 
   @override
-  State<Nfl> createState() => _NflState();
+  State<Nflteamrepository> createState() => _NflteamrepositoryState();
 }
 
-class _NflState extends State<Nfl> {
-  final nflDatabase = Nfldatabase();
+class _NflteamrepositoryState extends State<Nflteamrepository> {
+  final nflDatabase = Nflteaminformation();
 
   @override
   Widget build(BuildContext context) {

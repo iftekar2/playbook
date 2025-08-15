@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/Components/NFLData/NFLDatabase.dart';
-// Placeholder for your SportPage widget
+import 'package:playbook/Components/NFLData/NFLTeamInformation.dart';
 
 class Nflcategorycard extends StatefulWidget {
   Nflcategorycard({super.key});
@@ -10,8 +9,7 @@ class Nflcategorycard extends StatefulWidget {
 }
 
 class _NflcategorycardState extends State<Nflcategorycard> {
-  // You would need a way to dynamically get the correct database based on the sportName
-  final nflDatabase = Nfldatabase();
+  final nflDatabase = Nflteaminformation();
 
   @override
   Widget build(BuildContext context) {
