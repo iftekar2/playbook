@@ -14,7 +14,7 @@ class _NflcategorycardState extends State<Nflcategorycard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20),
+      padding: const EdgeInsets.only(top: 10, left: 15),
       child: Container(
         height: 190,
         width: 400,
@@ -53,7 +53,7 @@ class _NflcategorycardState extends State<Nflcategorycard> {
 
                 final teams = snapshot.data as List;
                 return Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  padding: EdgeInsets.only(left: 15, right: 8),
                   child: SizedBox(
                     height: 100,
                     child: ListView.builder(

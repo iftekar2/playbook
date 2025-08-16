@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/Components/NFLData/NFLTeamCategoryCard.dart';
+import 'package:playbook/Components/NFLData/NFLUpComingGames.dart';
 
 class Nflmainpage extends StatelessWidget {
   const Nflmainpage({super.key});
@@ -18,8 +19,8 @@ class Nflmainpage extends StatelessWidget {
 
       backgroundColor: const Color(0xffffffff),
       body: Padding(
-        padding: EdgeInsets.only(top: 10),
-        child: Column(children: [Nflcategorycard()]),
+        padding: EdgeInsets.only(top: 15),
+        child: Column(children: [Nflcategorycard(), Nflteamrepository()]),
       ),
     );
   }
