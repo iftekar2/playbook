@@ -69,7 +69,7 @@ class Upcomingmatchupdetails extends StatelessWidget {
                       'VS',
                       style: TextStyle(
                         fontSize: 25,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                         color: Colors.black,
                       ),
                     ),
@@ -113,6 +113,232 @@ class Upcomingmatchupdetails extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+
+            SizedBox(height: 30),
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Season Leaders",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+
+                  SizedBox(height: 5),
+                  Divider(
+                    color: const Color.fromARGB(255, 212, 212, 212),
+                    thickness: 1,
+                  ),
+
+                  SizedBox(height: 20),
+                  Column(
+                    children: [
+                      Text(
+                        '${game.passingYard}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Image.network(
+                                game.passingYardPlayerOneImage,
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                '${game.passingYardPlayerOneName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+                              Text(
+                                '${game.passingYardPlayerOneStates}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+
+                          Column(
+                            children: [
+                              Image.network(
+                                game.passingYardPlayerTwoImage,
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                '${game.passingYardPlayerTwoName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+                              Text(
+                                '${game.passingYardPlayerTwoStates}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 20),
+                  Divider(
+                    color: const Color.fromARGB(255, 212, 212, 212),
+                    thickness: 1,
+                  ),
+
+                  SizedBox(height: 15),
+                  Column(
+                    children: [
+                      Text(
+                        '${game.rushingYard}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Image.network(
+                                game.rushingYardPlayerOneImage,
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                '${game.rushingYardPlayerOneName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+                              Text(
+                                '${game.rushingYardPlayerOneStates}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+
+                          Column(
+                            children: [
+                              Image.network(
+                                game.rushingYardPlayerTwoImage,
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                '${game.rushingYardPlayerTwoName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+                              Text(
+                                '${game.rushingYardPlayerTwoStates}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 20),
+                  Divider(
+                    color: const Color.fromARGB(255, 212, 212, 212),
+                    thickness: 1,
+                  ),
+
+                  SizedBox(height: 15),
+                  Column(
+                    children: [
+                      Text(
+                        '${game.receivingYard}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Image.network(
+                                game.receivingYardPlayerOneImage,
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                '${game.receivingYardPlayerOneName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+                              Text(
+                                '${game.receivingYardPlayerOneStates}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+
+                          Column(
+                            children: [
+                              Image.network(
+                                game.receivingYardPlayerTwoImage,
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                '${game.receivingYardPlayerTwoName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              SizedBox(height: 5),
+                              Text(
+                                '${game.receivingYardPlayerTwoStates}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 50),
+                ],
+              ),
             ),
           ],
         ),
