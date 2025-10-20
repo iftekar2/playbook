@@ -3,7 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>GIDClientID</key>
-	<string>681101484335-98m23m38gocf65vfgu29eq0bki5d4cbc.apps.googleusercontent.com</string>
+	<string>630474740947-qije82pktdq6p7khutkgrg1vdgjjfso1.apps.googleusercontent.com</string>
+
 	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
 	<!-- Google Sign-in Section -->
 	<key>CFBundleURLTypes</key>
@@ -13,12 +14,21 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!-- TODO Replace this value: -->
-				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-				<string>com.googleusercontent.apps.681101484335-98m23m38gocf65vfgu29eq0bki5d4cbc</string>
+				<string>com.googleusercontent.apps.630474740947-qije82pktdq6p7khutkgrg1vdgjjfso1</string>
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.630474740947-qije82pktdq6p7khutkgrg1vdgjjfso1</string>
+        </array>
+      </dict>
+    </array>
 	<!-- End of the Google Sign-in Section -->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
