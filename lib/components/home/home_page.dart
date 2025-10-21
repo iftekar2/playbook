@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
             fontSize: 20,
             fontWeight: FontWeight.w600,
             letterSpacing: 1,
+            color: Color.fromRGBO(68, 59, 59, 1),
           ),
         ),
         backgroundColor: Colors.white,
@@ -40,7 +42,7 @@ class _HomePageState extends State<HomePage> {
       ),
 
       backgroundColor: Colors.white,
-      body: Center(child: Text("Home Page")),
+      body: Column(children: [SportsOptions()]),
     );
   }
 }

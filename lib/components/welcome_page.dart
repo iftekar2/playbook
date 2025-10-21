@@ -16,7 +16,6 @@ class _WelcomePageState extends State<WelcomePage>
     with TickerProviderStateMixin {
   final List<String> images = [
     "https://i.pinimg.com/736x/13/ad/96/13ad96659cef69a4dfc527f6bfdc3166.jpg",
-    // "https://i.pinimg.com/736x/d7/f4/ca/d7f4ca67def5fa697220cf1c0818c43c.jpg",
     "https://i.pinimg.com/736x/ec/04/6a/ec046a7b96e9fd597a28f356072c340f.jpg",
     "https://i.pinimg.com/736x/94/3a/76/943a767f9d5cb5fbba86be929086d594.jpg",
   ];
