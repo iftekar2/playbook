@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/home_page.dart';
+import 'package:playbook/components/bottom_navigation/navigation_page.dart';
 import 'package:playbook/components/welcome_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -23,7 +23,7 @@ class AuthGate extends StatelessWidget {
         final session = snapshot.hasData ? snapshot.data!.session : null;
 
         if (session != null) {
-          return HomePage(key: ValueKey('home_${session.user.id}'));
+          return NavigationPage(key: ValueKey('navigation_${session.user.id}'));
         } else {
           return WelcomePage();
         }

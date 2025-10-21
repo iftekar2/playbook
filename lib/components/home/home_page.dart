@@ -15,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   // Logout button pressed
   void _logout() async {
     await authService.signOut();
-    // AuthGate will automatically handle navigation based on auth state
   }
 
   @override
