@@ -4,6 +4,9 @@ import 'package:playbook/components/home/home_page.dart';
 import 'package:playbook/components/live_games/live_games_page.dart';
 import 'package:playbook/components/search/search_page.dart';
 import 'package:playbook/components/upcoming_games/upcoming_games_page.dart';
+import 'package:playbook/components/nfl_data/nfl_page.dart';
+import 'package:playbook/components/nba_data/nba_page.dart';
+import 'package:playbook/components/nhl_data/nhl_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -20,14 +23,41 @@ class _NavigationPageState extends State<NavigationPage> {
     super.initState();
   }
 
+  // Method to handle sport page navigation
+  void navigateToSport(String sport) {
+    setState(() {
+      // Navigate to sport pages (index 5+ for sports)
+      switch (sport) {
+        case 'NFL':
+          _currentIndex = 5;
+          break;
+        case 'NBA':
+          _currentIndex = 6;
+          break;
+        case 'NHL':
+          _currentIndex = 7;
+          break;
+        case 'MLB':
+          _currentIndex = 8;
+          break;
+        default:
+          _currentIndex = 0; // Default to home
+      }
+    });
+  }
+
   // Bottom navigation bar items
   List<Widget> _getScreens() {
     return [
-      HomePage(),
+      HomePage(onSportSelected: navigateToSport),
       LiveGamesPage(),
       SearchPage(),
       FinalGamesPage(),
       UpcomingGamesPage(),
+      NflPage(),
+      NbaPage(),
+      NhlPage(),
+      // MLB page would go here when created
     ];
   }
 
@@ -114,23 +144,20 @@ class _NavigationPageState extends State<NavigationPage> {
         });
       },
       borderRadius: BorderRadius.circular(12),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(isSelected ? selectedIcon : icon, color: color, size: 28),
-            SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                color: color,
-                fontSize: 12,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(isSelected ? selectedIcon : icon, color: color, size: 28),
+          SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

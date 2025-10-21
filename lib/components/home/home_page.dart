@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/components/nfl_data/nfl_in_home_screen.dart';
 import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final Function(String)? onSportSelected;
+
+  const HomePage({super.key, this.onSportSelected});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,6 +19,13 @@ class _HomePageState extends State<HomePage> {
   // Logout button pressed
   void _logout() async {
     await authService.signOut();
+  }
+
+  // Handle sport selection
+  void _onSportSelected(String sport) {
+    print('Selected sport: $sport');
+    // Call the parent callback if provided
+    widget.onSportSelected?.call(sport);
   }
 
   @override
@@ -42,7 +52,22 @@ class _HomePageState extends State<HomePage> {
       ),
 
       backgroundColor: Colors.white,
-      body: Column(children: [SportsOptions()]),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SportsOptions(onSportSelected: _onSportSelected),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10, left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [NflInHomeScreen()],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
