@@ -26,7 +26,6 @@ class _NavigationPageState extends State<NavigationPage> {
   // Method to handle sport page navigation
   void navigateToSport(String sport) {
     setState(() {
-      // Navigate to sport pages (index 5+ for sports)
       switch (sport) {
         case 'NFL':
           _currentIndex = 5;
@@ -41,7 +40,7 @@ class _NavigationPageState extends State<NavigationPage> {
           _currentIndex = 8;
           break;
         default:
-          _currentIndex = 0; // Default to home
+          _currentIndex = 0;
       }
     });
   }
@@ -49,7 +48,13 @@ class _NavigationPageState extends State<NavigationPage> {
   // Bottom navigation bar items
   List<Widget> _getScreens() {
     return [
-      HomePage(onSportSelected: navigateToSport),
+      HomePage(
+        onNavigateToLiveGames: () {
+          setState(() {
+            _currentIndex = 1; // Navigate to Live Games tab
+          });
+        },
+      ),
       LiveGamesPage(),
       SearchPage(),
       FinalGamesPage(),
