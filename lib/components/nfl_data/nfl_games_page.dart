@@ -12,16 +12,12 @@ class _NflPageState extends State<NflPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "NFL",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1,
-            color: Color.fromRGBO(68, 59, 59, 1),
-          ),
+        title: Image.network(
+          "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/873px-National_Football_League_logo.svg.png",
+          height: 50,
+          width: 50,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 240, 240, 240),
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,

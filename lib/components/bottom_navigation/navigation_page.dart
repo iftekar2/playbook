@@ -4,7 +4,7 @@ import 'package:playbook/components/home/home_page.dart';
 import 'package:playbook/components/live_games/live_games_page.dart';
 import 'package:playbook/components/search/search_page.dart';
 import 'package:playbook/components/upcoming_games/upcoming_games_page.dart';
-import 'package:playbook/components/nfl_data/nfl_page.dart';
+import 'package:playbook/components/nfl_data/nfl_games_page.dart';
 import 'package:playbook/components/nba_data/nba_page.dart';
 import 'package:playbook/components/nhl_data/nhl_page.dart';
 
@@ -51,8 +51,12 @@ class _NavigationPageState extends State<NavigationPage> {
       HomePage(
         onNavigateToLiveGames: () {
           setState(() {
-            _currentIndex = 1; // Navigate to Live Games tab
+            _currentIndex = 5; // Navigate to NFL Page
           });
+        },
+
+        onSportSelected: (String sport) {
+          navigateToSport(sport);
         },
       ),
       LiveGamesPage(),

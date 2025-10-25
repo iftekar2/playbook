@@ -46,8 +46,9 @@ class ConditionalNflSection extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   final VoidCallback? onNavigateToLiveGames;
+  final Function(String)? onSportSelected;
 
-  const HomePage({super.key, this.onNavigateToLiveGames});
+  const HomePage({super.key, this.onNavigateToLiveGames, this.onSportSelected});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -56,6 +57,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final authService = AuthService();
   final nflDatabase = NflDatabase();
+
+  // Handle sport selection
+  void _onSportSelected(String sport) {
+    print('Selected sport: $sport');
+    // Call the parent callback if provided
+    widget.onSportSelected?.call(sport);
+  }
 
   void logout() async {
     await authService.signOut();
@@ -92,7 +100,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SportsOptions(),
+          SportsOptions(onSportSelected: _onSportSelected),
 
           Expanded(
             child: SingleChildScrollView(

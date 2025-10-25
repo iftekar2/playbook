@@ -87,31 +87,26 @@ class _SportsOptionsState extends State<SportsOptions> {
                                     : const Color.fromARGB(0, 215, 5, 5),
                               ),
                             ),
-                            child: GestureDetector(
-                              onTap: () {
-                                _navigateToSportPage(sport['name']);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: sport['logo'] != null
-                                    ? Image.network(
-                                        sport['logo'],
-                                        fit: BoxFit.contain,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                              return Icon(
-                                                Icons.apps,
-                                                color: Colors.white,
-                                                size: 24,
-                                              );
-                                            },
-                                      )
-                                    : Icon(
-                                        Icons.apps,
-                                        color: Colors.white,
-                                        size: 24,
-                                      ),
-                              ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: sport['logo'] != null
+                                  ? Image.network(
+                                      sport['logo'],
+                                      fit: BoxFit.contain,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                            return Icon(
+                                              Icons.apps,
+                                              color: Colors.white,
+                                              size: 24,
+                                            );
+                                          },
+                                    )
+                                  : Icon(
+                                      Icons.apps,
+                                      color: Colors.white,
+                                      size: 24,
+                                    ),
                             ),
                           ),
                           SizedBox(height: 5),

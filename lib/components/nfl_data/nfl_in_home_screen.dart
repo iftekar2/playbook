@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playbook/components/live_games/live_games_page.dart';
 import 'package:playbook/components/nfl_data/database/nfl_database.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game.dart';
+import 'package:playbook/components/nfl_data/nfl_games_page.dart';
 
 class NflInHomeScreen extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;
@@ -43,9 +44,7 @@ class _NflInHomeScreenState extends State<NflInHomeScreen> {
                     } else {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => LiveGamesPage(),
-                        ),
+                        MaterialPageRoute(builder: (context) => NflPage()),
                       );
                     }
                   },
