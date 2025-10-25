@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/components/home/sports_options.dart';
+import 'package:playbook/components/login/email_login/auth_service.dart';
 import 'package:playbook/components/nfl_data/nfl_in_home_screen.dart';
+import 'package:playbook/components/welcome_page.dart';
 
 class HomePage extends StatefulWidget {
   final VoidCallback? onNavigateToLiveGames;
@@ -12,6 +14,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final authService = AuthService();
+
+  void logout() async {
+    await authService.signOut();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WelcomePage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +38,16 @@ class _HomePageState extends State<HomePage> {
             //letterSpacing: 1.0,
           ),
         ),
+
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: logout,
+              icon: Icon(Icons.logout, size: 28),
+            ),
+          ),
+        ],
       ),
 
       backgroundColor: Colors.white,
