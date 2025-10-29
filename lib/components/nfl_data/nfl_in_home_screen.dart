@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playbook/components/nfl_data/database/nfl_database.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game.dart';
 import 'package:playbook/components/nfl_data/nfl_games_page.dart';
-import 'package:playbook/components/nfl_data/nfl_game_detail_page.dart';
+import 'package:playbook/components/nfl_data/nfl_live_game_detail_page.dart';
 
 class NflInHomeScreen extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;

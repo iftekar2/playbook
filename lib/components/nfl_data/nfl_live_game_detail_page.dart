@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game.dart';
 
-class NflGameDetailModal extends StatefulWidget {
+class NflLiveGameDetailModal extends StatefulWidget {
   final NflGame game;
 
-  const NflGameDetailModal({super.key, required this.game});
+  const NflLiveGameDetailModal({super.key, required this.game});
 
   @override
-  State<NflGameDetailModal> createState() => _NflGameDetailModalState();
+  State<NflLiveGameDetailModal> createState() => _NflLiveGameDetailModalState();
 }
 
-class _NflGameDetailModalState extends State<NflGameDetailModal>
+class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _slideAnimation;
@@ -199,7 +199,7 @@ class _NflGameDetailModalState extends State<NflGameDetailModal>
                       return Icon(
                         Icons.person,
                         size: 60,
-                    5   color: Colors.grey[600],
+                        color: Colors.grey[600],
                       );
                     },
                   ),
@@ -274,7 +274,7 @@ class _NflGameDetailModalState extends State<NflGameDetailModal>
                       return Icon(
                         Icons.person,
                         size: 60,
-                    5   color: Colors.grey[600],
+                        color: Colors.grey[600],
                       );
                     },
                   ),
@@ -1348,7 +1348,7 @@ class NflGameDetailModalHelper {
       context: context,
       barrierDismissible: true,
       barrierColor: Colors.transparent,
-      builder: (context) => NflGameDetailModal(game: game),
+      builder: (context) => NflLiveGameDetailModal(game: game),
     );
   }
 }
