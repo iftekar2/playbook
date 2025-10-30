@@ -3,8 +3,13 @@ import 'package:playbook/components/nfl_data/database/nfl_game.dart';
 
 class NflLiveGameDetailModal extends StatefulWidget {
   final NflGame game;
+  final bool isFinal; // when true, hide LIVE tag and Game Progress
 
-  const NflLiveGameDetailModal({super.key, required this.game});
+  const NflLiveGameDetailModal({
+    super.key,
+    required this.game,
+    this.isFinal = false,
+  });
 
   @override
   State<NflLiveGameDetailModal> createState() => _NflLiveGameDetailModalState();
@@ -102,24 +107,25 @@ class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: const Text(
-                                'LIVE',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
+                            if (!widget.isFinal)
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: const Text(
+                                  'LIVE',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
                             GestureDetector(
                               onTap: _closeModal,
                               child: Container(
@@ -148,8 +154,8 @@ class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
                               // Teams section
                               _buildTeamsSection(),
                               const SizedBox(height: 24),
-                              // Game progress
-                              _buildGameProgress(),
+                              // Game progress (hidden for finals)
+                              if (!widget.isFinal) _buildGameProgress(),
                               const SizedBox(height: 24),
                               // Player status
                               _buildPlayerStatus(),
@@ -542,6 +548,7 @@ class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
                                       widget
                                           .game
                                           .team_one_passing_yard_player_game_state,
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
@@ -571,6 +578,7 @@ class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
                                       widget
                                           .game
                                           .team_two_passing_yard_player_game_state,
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
@@ -848,6 +856,7 @@ class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
                                       widget
                                           .game
                                           .team_one_receiving_yard_player_game_state,
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),

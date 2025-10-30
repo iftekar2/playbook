@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:playbook/components/nfl_data/database/nfl_database.dart';
 import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
-import 'package:playbook/components/nfl_data/nfl_in_home_screen.dart';
+import 'package:playbook/components/nfl_data/database/nfl_final_database.dart';
+import 'package:playbook/components/nfl_data/final_nfl_in_home_screen.dart';
+import 'package:playbook/components/nfl_data/live_nfl_in_home_screen.dart';
 import 'package:playbook/components/welcome_page.dart';
 
 class ConditionalNflSection extends StatelessWidget {
@@ -36,7 +38,64 @@ class ConditionalNflSection extends StatelessWidget {
           children: [
             if (includeTopSpace) const SizedBox(height: 20),
 
-            NflInHomeScreen(onSeeAllPressed: onSeeAllPressed),
+            LiveNflInHomeScreen(onSeeAllPressed: onSeeAllPressed),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class ConditionalFinalNflSection extends StatelessWidget {
+  final NflFinalDatabase nflFinalDatabase;
+  final VoidCallback? onSeeAllPressed;
+  final bool includeTopSpace;
+
+  const ConditionalFinalNflSection({
+    super.key,
+    required this.nflFinalDatabase,
+    this.onSeeAllPressed,
+    this.includeTopSpace = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<List<dynamic>>(
+      stream: nflFinalDatabase.stream,
+      builder: (context, snapshot) {
+        print(
+          'ConditionalFinalNflSection - Connection State: ${snapshot.connectionState}',
+        );
+        print('ConditionalFinalNflSection - Has Data: ${snapshot.hasData}');
+        print('ConditionalFinalNflSection - Has Error: ${snapshot.hasError}');
+        if (snapshot.hasData) {
+          print(
+            'ConditionalFinalNflSection - Data Length: ${snapshot.data?.length}',
+          );
+        }
+        if (snapshot.hasError) {
+          print('ConditionalFinalNflSection - Error: ${snapshot.error}');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const SizedBox.shrink();
+        }
+
+        final games = snapshot.data ?? [];
+        print('ConditionalFinalNflSection - Games Count: ${games.length}');
+
+        if (games.isEmpty) {
+          print(
+            'ConditionalFinalNflSection - Games is empty, returning SizedBox.shrink()',
+          );
+          return const SizedBox.shrink();
+        }
+
+        return Column(
+          children: [
+            if (includeTopSpace) const SizedBox(height: 20),
+
+            FinalNflInHomeScreen(onSeeAllPressed: onSeeAllPressed),
           ],
         );
       },
@@ -47,8 +106,13 @@ class ConditionalNflSection extends StatelessWidget {
 class HomePage extends StatefulWidget {
   final VoidCallback? onNavigateToLiveGames;
   final Function(String)? onSportSelected;
-
-  const HomePage({super.key, this.onNavigateToLiveGames, this.onSportSelected});
+  final VoidCallback? onNavigateToFinalGames;
+  const HomePage({
+    super.key,
+    this.onNavigateToLiveGames,
+    this.onSportSelected,
+    this.onNavigateToFinalGames,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -57,6 +121,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final authService = AuthService();
   final nflDatabase = NflDatabase();
+  final nflFinalDatabase = NflFinalDatabase();
 
   // Handle sport selection
   void _onSportSelected(String sport) {
@@ -130,13 +195,30 @@ class _HomePageState extends State<HomePage> {
                     onSeeAllPressed: widget.onNavigateToLiveGames,
                     includeTopSpace: false,
                   ),
-                  ConditionalNflSection(nflDatabase: nflDatabase),
 
-                  ConditionalNflSection(nflDatabase: nflDatabase),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          "Final Games",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
-                  ConditionalNflSection(nflDatabase: nflDatabase),
-
-                  ConditionalNflSection(nflDatabase: nflDatabase),
+                  ConditionalFinalNflSection(
+                    nflFinalDatabase: nflFinalDatabase,
+                    onSeeAllPressed: widget.onNavigateToFinalGames,
+                    includeTopSpace: false,
+                  ),
 
                   const SizedBox(height: 20),
                 ],

@@ -1,25 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/database/nfl_database.dart';
+import 'package:playbook/components/nfl_data/database/nfl_final_database.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game.dart';
 import 'package:playbook/components/nfl_data/nfl_games_page.dart';
-import 'package:playbook/components/nfl_data/nfl_live_game_detail_page.dart';
+import 'package:playbook/components/nfl_data/nfl_final_game_detail_page.dart';
 
-class NflInHomeScreen extends StatefulWidget {
+class FinalNflInHomeScreen extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;
 
-  const NflInHomeScreen({super.key, this.onSeeAllPressed});
+  const FinalNflInHomeScreen({super.key, this.onSeeAllPressed});
 
   @override
-  State<NflInHomeScreen> createState() => _NflInHomeScreenState();
+  State<FinalNflInHomeScreen> createState() => _FinalNflInHomeScreenState();
 }
 
-class _NflInHomeScreenState extends State<NflInHomeScreen> {
-  final nflDatabase = NflDatabase();
+class _FinalNflInHomeScreenState extends State<FinalNflInHomeScreen> {
+  final nflFinalDatabase = NflFinalDatabase();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Test direct database access
+  //   _testDatabaseConnection();
+  // }
+
+  // Future<void> _testDatabaseConnection() async {
+  //   try {
+  //     final response = await Supabase.instance.client
+  //         .from('final_nfl_games')
+  //         .select('*')
+  //         .limit(5);
+  //     // print('Direct database test - Response: $response');
+  //     // print('Direct database test - Count: ${response.length}');
+  //   } catch (e) {
+  //     print('Direct database test - Error: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<NflGame>>(
-      stream: nflDatabase.stream,
+      stream: nflFinalDatabase.stream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -74,7 +94,7 @@ class _NflInHomeScreenState extends State<NflInHomeScreen> {
                     margin: EdgeInsets.only(right: 16),
                     child: GestureDetector(
                       onTap: () {
-                        NflGameDetailModalHelper.show(context, game);
+                        NflFinalGameDetailModalHelper.show(context, game);
                       },
                       child: _GameCard(game: game),
                     ),
