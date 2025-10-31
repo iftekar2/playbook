@@ -55,6 +55,12 @@ class _NavigationPageState extends State<NavigationPage> {
           });
         },
 
+        onNavigateToFinalGames: () {
+          setState(() {
+            _currentIndex = 5; // Navigate to NFL Page
+          });
+        },
+
         onSportSelected: (String sport) {
           navigateToSport(sport);
         },

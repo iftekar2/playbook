@@ -17,7 +17,7 @@ class _NflPageState extends State<NflPage> {
           height: 50,
           width: 50,
         ),
-        backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
