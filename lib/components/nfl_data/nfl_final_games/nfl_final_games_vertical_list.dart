@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/components/nfl_data/database/nfl_final_games_repository.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
-import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/nfl_data/nfl_game_detail_modal.dart';
 
-class NflLiveGamesVerticalList extends StatefulWidget {
-  const NflLiveGamesVerticalList({super.key});
+class NflFinalGamesVerticalList extends StatefulWidget {
+  const NflFinalGamesVerticalList({super.key});
 
   @override
-  State<NflLiveGamesVerticalList> createState() =>
-      _NflLiveGamesVerticalListState();
+  State<NflFinalGamesVerticalList> createState() =>
+      _NflFinalGamesVerticalListState();
 }
 
-class _NflLiveGamesVerticalListState extends State<NflLiveGamesVerticalList> {
-  final nflDatabase = NflLiveGamesRepository();
+class _NflFinalGamesVerticalListState extends State<NflFinalGamesVerticalList> {
+  final nflDatabase = NflFinalGamesRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,11 @@ class _NflLiveGamesVerticalListState extends State<NflLiveGamesVerticalList> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 1. Header (Takes only the space it needs)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: const EdgeInsets.only(left: 20, bottom: 15),
               child: Text(
-                "Live NFL Games",
+                "Final NFL Games",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -44,23 +45,23 @@ class _NflLiveGamesVerticalListState extends State<NflLiveGamesVerticalList> {
               ),
             ),
 
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: games.length,
-                itemBuilder: (context, index) {
-                  final game = games[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: GestureDetector(
-                      onTap: () {
-                        NflGameDetailModalHelper.show(context, game);
-                      },
-                      child: _GameCard(game: game),
-                    ),
-                  );
-                },
-              ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              itemCount: games.length,
+              itemBuilder: (context, index) {
+                final game = games[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      NflGameDetailModalHelper.show(context, game);
+                    },
+                    child: _GameCard(game: game),
+                  ),
+                );
+              },
             ),
           ],
         );

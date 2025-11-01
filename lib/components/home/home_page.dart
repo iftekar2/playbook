@@ -3,8 +3,8 @@ import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.
 import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
 import 'package:playbook/components/nfl_data/database/nfl_final_games_repository.dart';
-import 'package:playbook/components/nfl_data/nfl_final_games_horizontal_list.dart';
-import 'package:playbook/components/nfl_data/nfl_live_games_horizontal_list.dart';
+import 'package:playbook/components/nfl_data/nfl_final_games/nfl_final_games_horizontal_list.dart';
+import 'package:playbook/components/nfl_data/nfl_live_games/nfl_live_games_horizontal_list.dart';
 import 'package:playbook/components/welcome_page.dart';
 
 class ConditionalNflSection extends StatelessWidget {

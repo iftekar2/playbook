@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/nfl_live_games_vertical_list.dart';
+import 'package:playbook/components/nfl_data/nfl_final_games/nfl_final_games_vertical_list.dart';
+import 'package:playbook/components/nfl_data/nfl_live_games/nfl_live_games_vertical_list.dart';
 
 class NflLandingPage extends StatefulWidget {
   const NflLandingPage({super.key});
@@ -18,18 +19,39 @@ class _NflLandingPageState extends State<NflLandingPage> {
           height: 50,
           width: 50,
         ),
-        backgroundColor: Colors.white,
+
+        backgroundColor: const Color.fromARGB(255, 217, 217, 217),
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
-      body: Center(
+
+      // ⭐ Use a SingleChildScrollView as the main body content
+      body: SingleChildScrollView(
+        // We use Column inside SingleChildScrollView to stack the two sections
         child: Column(
-          // mainAxisAlignment.center is fine, but you might want to switch to start
-          // if you have other content above the list.
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // ⭐ WRAP THE VERTICAL LIST IN EXPANDED
-            Expanded(child: NflLiveGamesVerticalList()),
+            // 1. LIVE GAMES SECTION
+            // Wrap in Padding for vertical separation and pass the scrolling control
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: NflLiveGamesVerticalList(),
+            ),
+
+            // 2. VISUAL SEPARATOR (Optional, but good for distinction)
+            const SizedBox(height: 25.0),
+            Divider(
+              color: const Color.fromARGB(255, 230, 230, 230),
+              thickness: 8,
+              height: 0,
+            ),
+            const SizedBox(height: 25.0),
+
+            // 3. FINAL GAMES SECTION
+            NflFinalGamesVerticalList(),
+
+            // Add final bottom padding
+            const SizedBox(height: 20.0),
           ],
         ),
       ),

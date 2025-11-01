@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playbook/components/nfl_data/database/nfl_final_games_repository.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
 import 'package:playbook/components/nfl_data/nfl_landing_page.dart';
-import 'package:playbook/components/nfl_data/nfl_final_game_detail_modal_helper.dart';
+import 'package:playbook/components/nfl_data/nfl_final_games/nfl_final_game_detail_modal_helper.dart';
 
 class NflFinalGamesHorizontalList extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;
