@@ -4,16 +4,18 @@ import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
 import 'package:playbook/components/nfl_data/nfl_landing_page.dart';
 import 'package:playbook/components/nfl_data/nfl_game_detail_modal.dart';
 
-class LiveNflInHomeScreen extends StatefulWidget {
+class NflLiveGamesHorizontalList extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;
 
-  const LiveNflInHomeScreen({super.key, this.onSeeAllPressed});
+  const NflLiveGamesHorizontalList({super.key, this.onSeeAllPressed});
 
   @override
-  State<LiveNflInHomeScreen> createState() => _LiveNflInHomeScreenState();
+  State<NflLiveGamesHorizontalList> createState() =>
+      _NflLiveGamesHorizontalListState();
 }
 
-class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
+class _NflLiveGamesHorizontalListState
+    extends State<NflLiveGamesHorizontalList> {
   final nflDatabase = NflLiveGamesRepository();
 
   @override
@@ -30,6 +32,7 @@ class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
         }
 
         final games = snapshot.data ?? [];
+        final limitedGames = games.take(3).toList();
 
         return Column(
           children: [
@@ -68,9 +71,9 @@ class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                itemCount: games.length,
+                itemCount: limitedGames.length,
                 itemBuilder: (context, index) {
-                  final game = games[index];
+                  final game = limitedGames[index];
                   return Container(
                     width: 320,
                     margin: EdgeInsets.only(right: 16),

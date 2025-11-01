@@ -32,6 +32,7 @@ class _NflFinalGamesHorizontalListState
         }
 
         final games = snapshot.data ?? [];
+        final limitedGames = games.take(3).toList();
 
         return Column(
           children: [
@@ -70,9 +71,9 @@ class _NflFinalGamesHorizontalListState
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                itemCount: games.length,
+                itemCount: limitedGames.length,
                 itemBuilder: (context, index) {
-                  final game = games[index];
+                  final game = limitedGames[index];
                   return Container(
                     width: 320,
                     margin: EdgeInsets.only(right: 16),

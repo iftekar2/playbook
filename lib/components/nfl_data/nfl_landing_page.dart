@@ -25,32 +25,20 @@ class _NflLandingPageState extends State<NflLandingPage> {
       ),
       backgroundColor: Colors.white,
 
-      // ⭐ Use a SingleChildScrollView as the main body content
       body: SingleChildScrollView(
-        // We use Column inside SingleChildScrollView to stack the two sections
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // 1. LIVE GAMES SECTION
-            // Wrap in Padding for vertical separation and pass the scrolling control
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: NflLiveGamesVerticalList(),
             ),
 
-            // 2. VISUAL SEPARATOR (Optional, but good for distinction)
-            const SizedBox(height: 25.0),
-            Divider(
-              color: const Color.fromARGB(255, 230, 230, 230),
-              thickness: 8,
-              height: 0,
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: NflFinalGamesVerticalList(),
             ),
-            const SizedBox(height: 25.0),
 
-            // 3. FINAL GAMES SECTION
-            NflFinalGamesVerticalList(),
-
-            // Add final bottom padding
             const SizedBox(height: 20.0),
           ],
         ),

@@ -38,7 +38,7 @@ class ConditionalNflSection extends StatelessWidget {
           children: [
             if (includeTopSpace) const SizedBox(height: 20),
 
-            LiveNflInHomeScreen(onSeeAllPressed: onSeeAllPressed),
+            NflLiveGamesHorizontalList(onSeeAllPressed: onSeeAllPressed),
           ],
         );
       },
