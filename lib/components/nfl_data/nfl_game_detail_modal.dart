@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/database/nfl_game.dart';
+import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
 
-class NflLiveGameDetailModal extends StatefulWidget {
+class NflGameDetailModal extends StatefulWidget {
   final NflGame game;
   final bool isFinal; // when true, hide LIVE tag and Game Progress
 
-  const NflLiveGameDetailModal({
+  const NflGameDetailModal({
     super.key,
     required this.game,
     this.isFinal = false,
   });
 
   @override
-  State<NflLiveGameDetailModal> createState() => _NflLiveGameDetailModalState();
+  State<NflGameDetailModal> createState() => _NflGameDetailModalState();
 }
 
-class _NflLiveGameDetailModalState extends State<NflLiveGameDetailModal>
+class _NflGameDetailModalState extends State<NflGameDetailModal>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _slideAnimation;
@@ -1357,7 +1357,7 @@ class NflGameDetailModalHelper {
       context: context,
       barrierDismissible: true,
       barrierColor: Colors.transparent,
-      builder: (context) => NflLiveGameDetailModal(game: game),
+      builder: (context) => NflGameDetailModal(game: game),
     );
   }
 }

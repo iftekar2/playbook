@@ -1,7 +1,7 @@
-import 'package:playbook/components/nfl_data/database/nfl_game.dart';
+import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class NflDatabase {
+class NflLiveGamesRepository {
   // Connect to the live_nfl_games table
   final database = Supabase.instance.client.from('live_nfl_games');
 

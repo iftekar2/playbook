@@ -1,25 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/database/nfl_database.dart';
-import 'package:playbook/components/nfl_data/database/nfl_game.dart';
-import 'package:playbook/components/nfl_data/nfl_games_page.dart';
-import 'package:playbook/components/nfl_data/nfl_live_game_detail_page.dart';
+import 'package:playbook/components/nfl_data/database/nfl_final_games_repository.dart';
+import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
+import 'package:playbook/components/nfl_data/nfl_landing_page.dart';
+import 'package:playbook/components/nfl_data/nfl_final_game_detail_modal_helper.dart';
 
-class LiveNflInHomeScreen extends StatefulWidget {
+class NflFinalGamesHorizontalList extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;
 
-  const LiveNflInHomeScreen({super.key, this.onSeeAllPressed});
+  const NflFinalGamesHorizontalList({super.key, this.onSeeAllPressed});
 
   @override
-  State<LiveNflInHomeScreen> createState() => _LiveNflInHomeScreenState();
+  State<NflFinalGamesHorizontalList> createState() =>
+      _NflFinalGamesHorizontalListState();
 }
 
-class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
-  final nflDatabase = NflDatabase();
+class _NflFinalGamesHorizontalListState
+    extends State<NflFinalGamesHorizontalList> {
+  final nflFinalDatabase = NflFinalGamesRepository();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Test direct database access
+  //   _testDatabaseConnection();
+  // }
+
+  // Future<void> _testDatabaseConnection() async {
+  //   try {
+  //     final response = await Supabase.instance.client
+  //         .from('final_nfl_games')
+  //         .select('*')
+  //         .limit(5);
+  //     // print('Direct database test - Response: $response');
+  //     // print('Direct database test - Count: ${response.length}');
+  //   } catch (e) {
+  //     print('Direct database test - Error: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<NflGame>>(
-      stream: nflDatabase.stream,
+      stream: nflFinalDatabase.stream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -44,7 +66,9 @@ class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
                     } else {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => NflPage()),
+                        MaterialPageRoute(
+                          builder: (context) => NflLandingPage(),
+                        ),
                       );
                     }
                   },
@@ -74,7 +98,7 @@ class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
                     margin: EdgeInsets.only(right: 16),
                     child: GestureDetector(
                       onTap: () {
-                        NflGameDetailModalHelper.show(context, game);
+                        NflFinalGameDetailModalHelper.show(context, game);
                       },
                       child: _GameCard(game: game),
                     ),

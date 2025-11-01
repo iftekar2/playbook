@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class NflPage extends StatefulWidget {
-  const NflPage({super.key});
+class NflLandingPage extends StatefulWidget {
+  const NflLandingPage({super.key});
 
   @override
-  State<NflPage> createState() => _NflPageState();
+  State<NflLandingPage> createState() => _NflLandingPageState();
 }
 
-class _NflPageState extends State<NflPage> {
+class _NflLandingPageState extends State<NflLandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

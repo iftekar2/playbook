@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/database/nfl_game.dart';
-import 'package:playbook/components/nfl_data/nfl_live_game_detail_page.dart';
+import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
+import 'package:playbook/components/nfl_data/nfl_game_detail_modal.dart';
 
 class NflFinalGameDetailModalHelper {
   static void show(BuildContext context, NflGame game) {
@@ -8,7 +8,7 @@ class NflFinalGameDetailModalHelper {
       context: context,
       barrierDismissible: true,
       barrierColor: Colors.transparent,
-      builder: (context) => NflLiveGameDetailModal(game: game, isFinal: true),
+      builder: (context) => NflGameDetailModal(game: game, isFinal: true),
     );
   }
 }

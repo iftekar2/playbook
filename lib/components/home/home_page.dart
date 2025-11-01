@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/database/nfl_database.dart';
+import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
-import 'package:playbook/components/nfl_data/database/nfl_final_database.dart';
-import 'package:playbook/components/nfl_data/final_nfl_in_home_screen.dart';
-import 'package:playbook/components/nfl_data/live_nfl_in_home_screen.dart';
+import 'package:playbook/components/nfl_data/database/nfl_final_games_repository.dart';
+import 'package:playbook/components/nfl_data/nfl_final_games_horizontal_list.dart';
+import 'package:playbook/components/nfl_data/nfl_live_games_horizontal_list.dart';
 import 'package:playbook/components/welcome_page.dart';
 
 class ConditionalNflSection extends StatelessWidget {
-  final NflDatabase nflDatabase;
+  final NflLiveGamesRepository nflDatabase;
   final VoidCallback? onSeeAllPressed;
   final bool includeTopSpace;
 
@@ -47,7 +47,7 @@ class ConditionalNflSection extends StatelessWidget {
 }
 
 class ConditionalFinalNflSection extends StatelessWidget {
-  final NflFinalDatabase nflFinalDatabase;
+  final NflFinalGamesRepository nflFinalDatabase;
   final VoidCallback? onSeeAllPressed;
   final bool includeTopSpace;
 
@@ -95,7 +95,7 @@ class ConditionalFinalNflSection extends StatelessWidget {
           children: [
             if (includeTopSpace) const SizedBox(height: 20),
 
-            FinalNflInHomeScreen(onSeeAllPressed: onSeeAllPressed),
+            NflFinalGamesHorizontalList(onSeeAllPressed: onSeeAllPressed),
           ],
         );
       },
@@ -120,8 +120,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final authService = AuthService();
-  final nflDatabase = NflDatabase();
-  final nflFinalDatabase = NflFinalDatabase();
+  final nflDatabase = NflLiveGamesRepository();
+  final nflFinalDatabase = NflFinalGamesRepository();
 
   // Handle sport selection
   void _onSportSelected(String sport) {
