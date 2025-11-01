@@ -18,7 +18,7 @@ class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<NflGame>>(
+    return StreamBuilder<List<NflGameModel>>(
       stream: nflDatabase.stream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -92,7 +92,7 @@ class _LiveNflInHomeScreenState extends State<LiveNflInHomeScreen> {
 }
 
 class _GameCard extends StatelessWidget {
-  final NflGame game;
+  final NflGameModel game;
 
   const _GameCard({required this.game});
 

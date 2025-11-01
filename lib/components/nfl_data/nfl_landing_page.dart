@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/components/nfl_data/nfl_live_games_vertical_list.dart';
 
 class NflLandingPage extends StatefulWidget {
   const NflLandingPage({super.key});
@@ -23,21 +24,12 @@ class _NflLandingPageState extends State<NflLandingPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
+          // mainAxisAlignment.center is fine, but you might want to switch to start
+          // if you have other content above the list.
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "NFL Page",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(68, 59, 59, 1),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "NFL content will be displayed here",
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-            ),
+            // ⭐ WRAP THE VERTICAL LIST IN EXPANDED
+            Expanded(child: NflLiveGamesVerticalList()),
           ],
         ),
       ),

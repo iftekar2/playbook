@@ -1,4 +1,4 @@
-class NflGame {
+class NflGameModel {
   int? id;
   String team_one_logo;
   String team_one_name;
@@ -82,7 +82,7 @@ class NflGame {
   String team_two_tackles_player_game_state;
   String team_two_player_two_tackles;
 
-  NflGame({
+  NflGameModel({
     this.id,
     required this.team_one_logo,
     required this.team_one_name,
@@ -167,8 +167,8 @@ class NflGame {
     required this.team_two_player_two_tackles,
   });
 
-  factory NflGame.fromMap(Map<String, dynamic> map) {
-    return NflGame(
+  factory NflGameModel.fromMap(Map<String, dynamic> map) {
+    return NflGameModel(
       id: map['id'] as int?,
       team_one_logo: (map['team_one_logo'] ?? '').toString(),
       team_one_name: (map['team_one_name'] ?? '').toString(),

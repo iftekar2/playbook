@@ -6,13 +6,13 @@ class NflFinalGamesRepository {
   final database = Supabase.instance.client.from('final_nfl_games');
 
   // Read from the database
-  Stream<List<NflGame>> get stream {
+  Stream<List<NflGameModel>> get stream {
     return Supabase.instance.client
         .from('final_nfl_games')
         .stream(primaryKey: ['id'])
         .map((data) {
           return data.map((nflGame) {
-            return NflGame.fromMap(nflGame);
+            return NflGameModel.fromMap(nflGame);
           }).toList();
         });
   }

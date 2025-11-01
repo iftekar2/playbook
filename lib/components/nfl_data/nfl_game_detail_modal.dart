@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
 
 class NflGameDetailModal extends StatefulWidget {
-  final NflGame game;
+  final NflGameModel game;
   final bool isFinal; // when true, hide LIVE tag and Game Progress
 
   const NflGameDetailModal({
@@ -1352,7 +1352,7 @@ class _NflGameDetailModalState extends State<NflGameDetailModal>
 
 // Static method to show the modal
 class NflGameDetailModalHelper {
-  static void show(BuildContext context, NflGame game) {
+  static void show(BuildContext context, NflGameModel game) {
     showDialog(
       context: context,
       barrierDismissible: true,

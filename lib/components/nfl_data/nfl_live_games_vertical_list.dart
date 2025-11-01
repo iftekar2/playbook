@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:playbook/components/nfl_data/database/nfl_final_games_repository.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
-import 'package:playbook/components/nfl_data/nfl_landing_page.dart';
-import 'package:playbook/components/nfl_data/nfl_final_game_detail_modal_helper.dart';
+import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
+import 'package:playbook/components/nfl_data/nfl_game_detail_modal.dart';
 
-class NflFinalGamesHorizontalList extends StatefulWidget {
-  final VoidCallback? onSeeAllPressed;
-
-  const NflFinalGamesHorizontalList({super.key, this.onSeeAllPressed});
+class NflLiveGamesVerticalList extends StatefulWidget {
+  const NflLiveGamesVerticalList({super.key});
 
   @override
-  State<NflFinalGamesHorizontalList> createState() =>
-      _NflFinalGamesHorizontalListState();
+  State<NflLiveGamesVerticalList> createState() =>
+      _NflLiveGamesVerticalListState();
 }
 
-class _NflFinalGamesHorizontalListState
-    extends State<NflFinalGamesHorizontalList> {
-  final nflFinalDatabase = NflFinalGamesRepository();
+class _NflLiveGamesVerticalListState extends State<NflLiveGamesVerticalList> {
+  final nflDatabase = NflLiveGamesRepository();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<NflGameModel>>(
-      stream: nflFinalDatabase.stream,
+      stream: nflDatabase.stream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -34,51 +30,31 @@ class _NflFinalGamesHorizontalListState
         final games = snapshot.data ?? [];
 
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {
-                    if (widget.onSeeAllPressed != null) {
-                      widget.onSeeAllPressed!();
-                    } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NflLandingPage(),
-                        ),
-                      );
-                    }
-                  },
-                  child: Text(
-                    "See all",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Text(
+                "Live NFL Games",
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
             ),
 
-            const SizedBox(height: 10),
-            Container(
-              height: 180,
+            Expanded(
               child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: games.length,
                 itemBuilder: (context, index) {
                   final game = games[index];
-                  return Container(
-                    width: 320,
-                    margin: EdgeInsets.only(right: 16),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
                     child: GestureDetector(
                       onTap: () {
-                        NflFinalGameDetailModalHelper.show(context, game);
+                        NflGameDetailModalHelper.show(context, game);
                       },
                       child: _GameCard(game: game),
                     ),
@@ -116,6 +92,7 @@ class _GameCard extends StatelessWidget {
           ),
         ],
       ),
+
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -190,6 +167,7 @@ class _TeamSection extends StatelessWidget {
             shape: BoxShape.circle,
             color: Colors.grey[300],
           ),
+
           child: ClipOval(
             child: Image.network(
               logo,
