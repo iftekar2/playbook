@@ -34,7 +34,7 @@ class _NflLiveGamesVerticalListState extends State<NflLiveGamesVerticalList> {
           children: [
             // 1. Header (Takes only the space it needs)
             Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 10, top: 20),
+              padding: const EdgeInsets.only(left: 20, bottom: 15, top: 20),
               child: Text(
                 "Live NFL Games",
                 style: const TextStyle(

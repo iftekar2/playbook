@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/nfl_data/database/nfl_game_model.dart';
-import 'package:playbook/components/nfl_data/nfl_landing_page.dart';
 import 'package:playbook/components/nfl_data/nfl_game_detail_modal.dart';
 
 class NflLiveGamesHorizontalList extends StatefulWidget {
   final VoidCallback? onSeeAllPressed;
+  final bool showAll;
 
-  const NflLiveGamesHorizontalList({super.key, this.onSeeAllPressed});
+  const NflLiveGamesHorizontalList({
+    super.key,
+    this.onSeeAllPressed,
+    this.showAll = false,
+  });
 
   @override
   State<NflLiveGamesHorizontalList> createState() =>
@@ -32,39 +36,10 @@ class _NflLiveGamesHorizontalListState
         }
 
         final games = snapshot.data ?? [];
-        final limitedGames = games.take(3).toList();
+        final limitedGames = widget.showAll ? games : games.take(3).toList();
 
         return Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {
-                    if (widget.onSeeAllPressed != null) {
-                      widget.onSeeAllPressed!();
-                    } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NflLandingPage(),
-                        ),
-                      );
-                    }
-                  },
-                  child: Text(
-                    "See all",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
             const SizedBox(height: 10),
             Container(
               height: 180,

@@ -51,7 +51,7 @@ class _NavigationPageState extends State<NavigationPage> {
       HomePage(
         onNavigateToLiveGames: () {
           setState(() {
-            _currentIndex = 5; // Navigate to NFL Page
+            _currentIndex = 1; // Navigate to NFL Page
           });
         },
 

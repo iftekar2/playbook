@@ -12,10 +12,10 @@ class _LiveGamesPageState extends State<LiveGamesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white),
+      appBar: AppBar(title: Text("Live Games"), backgroundColor: Colors.white),
 
       backgroundColor: Colors.white,
-      body: Column(children: [NflLiveGamesHorizontalList()]),
+      body: NflLiveGamesHorizontalList(showAll: true),
     );
   }
 }

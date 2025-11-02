@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/components/live_games/live_games_page.dart';
 import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
@@ -107,11 +108,14 @@ class HomePage extends StatefulWidget {
   final VoidCallback? onNavigateToLiveGames;
   final Function(String)? onSportSelected;
   final VoidCallback? onNavigateToFinalGames;
+  final VoidCallback? onSeeAllPressed;
+
   const HomePage({
     super.key,
     this.onNavigateToLiveGames,
     this.onSportSelected,
     this.onNavigateToFinalGames,
+    this.onSeeAllPressed,
   });
 
   @override
@@ -187,6 +191,37 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          if (widget.onSeeAllPressed != null) {
+                            widget.onSeeAllPressed!();
+                          } else if (widget.onNavigateToLiveGames != null) {
+                            widget.onNavigateToLiveGames!();
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LiveGamesPage(),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          "See all",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
 
