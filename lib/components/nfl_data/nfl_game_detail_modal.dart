@@ -1253,6 +1253,7 @@ class _NflGameDetailModalState extends State<NflGameDetailModal>
                       'First Downs',
                       widget.game.team_one_first_downs,
                     ),
+                    _buildStatRow('Penalties', widget.game.team_one_penalties),
                     _buildStatRow(
                       'Third Downs',
                       widget.game.team_one_third_down,
@@ -1304,6 +1305,7 @@ class _NflGameDetailModalState extends State<NflGameDetailModal>
                       'First Downs',
                       widget.game.team_two_first_downs,
                     ),
+                    _buildStatRow('Penalties', widget.game.team_two_penalties),
                     _buildStatRow(
                       'Third Downs',
                       widget.game.team_two_third_down,

@@ -98,6 +98,9 @@ class _GameCard extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
+            _GameStatusSection(status: game.game_status),
+
+            const SizedBox(height: 12),
             // Top Team
             _TeamSection(
               logo: game.team_one_logo,
@@ -216,6 +219,51 @@ class _TeamSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _GameStatusSection extends StatelessWidget {
+  final String status;
+
+  const _GameStatusSection({required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    // Use the status directly (same as modal does)
+    // Only hide if truly empty after trimming
+    final displayStatus = status.trim();
+
+    if (displayStatus.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    // Determine color based on game state (live/final logic)
+    final statusLower = displayStatus.toLowerCase();
+    final bool isLive =
+        statusLower.contains('q') ||
+        statusLower.contains('halftime') ||
+        statusLower.contains('quarter') ||
+        statusLower.contains('1st') ||
+        statusLower.contains('2nd') ||
+        statusLower.contains('3rd') ||
+        statusLower.contains('4th');
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: SizedBox(
+        width: double.infinity,
+        child: Text(
+          displayStatus.toUpperCase(),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            // Use red for live games for emphasis
+            color: isLive ? Colors.red[700] : Colors.grey[700],
+          ),
+        ),
+      ),
     );
   }
 }
