@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playbook/components/final_games/final_games_page.dart';
 import 'package:playbook/components/live_games/live_games_page.dart';
 import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/home/sports_options.dart';
@@ -246,6 +247,37 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          if (widget.onSeeAllPressed != null) {
+                            widget.onSeeAllPressed!();
+                          } else if (widget.onNavigateToFinalGames != null) {
+                            widget.onNavigateToFinalGames!();
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FinalGamesPage(),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          "See all",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
 
