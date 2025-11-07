@@ -5,7 +5,7 @@ import 'package:playbook/components/live_games/live_games_page.dart';
 import 'package:playbook/components/search/search_page.dart';
 import 'package:playbook/components/upcoming_games/upcoming_games_page.dart';
 import 'package:playbook/components/nfl_data/nfl_landing_page.dart';
-import 'package:playbook/components/nba_data/nba_page.dart';
+import 'package:playbook/components/nba_data/nba_landing_page.dart';
 import 'package:playbook/components/nhl_data/nhl_page.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -70,7 +70,7 @@ class _NavigationPageState extends State<NavigationPage> {
       FinalGamesPage(),
       UpcomingGamesPage(),
       NflLandingPage(),
-      NbaPage(),
+      NbaLandingPage(),
       NhlPage(),
       // MLB page would go here when created
     ];
