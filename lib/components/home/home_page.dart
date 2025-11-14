@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/components/final_games/final_games_page.dart';
 import 'package:playbook/components/live_games/live_games_page.dart';
+import 'package:playbook/components/nba_data/nba_live_games/nba_live_games_horizontal_list.dart';
 import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/home/sports_options.dart';
 import 'package:playbook/components/login/email_login/auth_service.dart';
@@ -231,6 +232,8 @@ class _HomePageState extends State<HomePage> {
                     onSeeAllPressed: widget.onNavigateToLiveGames,
                     includeTopSpace: false,
                   ),
+
+                  NbaLiveGamesHorizontalList(),
 
                   const SizedBox(height: 20),
                   Padding(

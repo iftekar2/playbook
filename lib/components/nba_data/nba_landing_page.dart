@@ -12,37 +12,20 @@ class _NbaLandingPageState extends State<NbaLandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "NBA",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1,
-            color: Color.fromRGBO(68, 59, 59, 1),
-          ),
+        title: Image.network(
+          "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/National_Basketball_Association_logo.svg/210px-National_Basketball_Association_logo.svg.png",
+          height: 50,
+          width: 50,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 217, 217, 217),
         automaticallyImplyLeading: false,
       ),
+
       backgroundColor: Colors.white,
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "NBA Page",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(68, 59, 59, 1),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "NBA content will be displayed here",
-              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-            ),
-          ],
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [Padding(padding: const EdgeInsets.only(top: 10))],
         ),
       ),
     );
