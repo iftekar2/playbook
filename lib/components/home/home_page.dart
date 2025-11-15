@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playbook/components/final_games/final_games_page.dart';
 import 'package:playbook/components/live_games/live_games_page.dart';
+import 'package:playbook/components/nba_data/database/nba_live_games_repository.dart';
 import 'package:playbook/components/nba_data/nba_live_games/nba_live_games_horizontal_list.dart';
 import 'package:playbook/components/nfl_data/database/nfl_live_games_repository.dart';
 import 'package:playbook/components/home/sports_options.dart';
@@ -42,6 +43,45 @@ class ConditionalNflSection extends StatelessWidget {
             if (includeTopSpace) const SizedBox(height: 20),
 
             NflLiveGamesHorizontalList(onSeeAllPressed: onSeeAllPressed),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class ConditionalNbaSection extends StatelessWidget {
+  final NbaLiveGamesRepository nbaLiveGamesRepository;
+  final VoidCallback? onSeeAllPressed;
+  final bool includeTopSpace;
+
+  const ConditionalNbaSection({
+    super.key,
+    required this.nbaLiveGamesRepository,
+    this.onSeeAllPressed,
+    this.includeTopSpace = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<List<dynamic>>(
+      stream: nbaLiveGamesRepository.stream,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const SizedBox.shrink();
+        }
+
+        final games = snapshot.data ?? [];
+
+        if (games.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return Column(
+          children: [
+            if (includeTopSpace) const SizedBox(height: 20),
+
+            NbaLiveGamesHorizontalList(onSeeAllPressed: onSeeAllPressed),
           ],
         );
       },
@@ -127,6 +167,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final authService = AuthService();
   final nflDatabase = NflLiveGamesRepository();
+  final nbaDatabase = NbaLiveGamesRepository();
   final nflFinalDatabase = NflFinalGamesRepository();
 
   // Handle sport selection
@@ -233,7 +274,45 @@ class _HomePageState extends State<HomePage> {
                     includeTopSpace: false,
                   ),
 
-                  NbaLiveGamesHorizontalList(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          if (widget.onSeeAllPressed != null) {
+                            widget.onSeeAllPressed!();
+                          } else if (widget.onNavigateToLiveGames != null) {
+                            widget.onNavigateToLiveGames!();
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LiveGamesPage(),
+                              ),
+                            );
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text(
+                            "See all",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  ConditionalNbaSection(
+                    nbaLiveGamesRepository: nbaDatabase,
+                    onSeeAllPressed: widget.onNavigateToLiveGames,
+                    includeTopSpace: false,
+                  ),
 
                   const SizedBox(height: 20),
                   Padding(

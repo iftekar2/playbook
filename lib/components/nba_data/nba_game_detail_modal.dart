@@ -320,11 +320,20 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: periods.map((label) {
               final bool isCompleted;
+              final bool isHalftime =
+                  time == 'HALFTIME' ||
+                  statusLabel.toLowerCase().contains('halftime');
+
               if (label == 'OT') {
                 isCompleted = currentQuarter > 4 || completed;
               } else {
                 final int periodNumber = int.tryParse(label) ?? 1;
-                isCompleted = periodNumber < currentQuarter || completed;
+                // Mark quarter 2 as completed if it's halftime
+                if (isHalftime && periodNumber == 2) {
+                  isCompleted = true;
+                } else {
+                  isCompleted = periodNumber < currentQuarter || completed;
+                }
               }
               return _buildQuarterIndicator(label, isCompleted);
             }).toList(),
@@ -389,13 +398,17 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[200]!),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 152, 152, 152),
+                  ),
                   borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
                 ),
+
                 child: Column(
                   children: [
                     const Text(
-                      "Points Leader",
+                      "Rebounds Leader",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -404,14 +417,14 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
 
                     const SizedBox(height: 10),
 
-                    Row(
+                    Column(
                       children: [
                         Column(
                           children: [
                             Image.network(
-                              widget.game.team_one_points_leader_imag,
-                              width: 60,
-                              height: 60,
+                              widget.game.team_one_points_leader_image,
+                              width: 70,
+                              height: 70,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
                                   Icons.person,
@@ -428,149 +441,194 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
 
-                        SizedBox(width: 10),
+                            SizedBox(height: 10),
 
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Text("PTS: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_one_points_leader_points,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text("PTS: "),
+                                    Text(
+                                      widget.game.team_one_points_leader_points,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
-
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("FG: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_one_points_leader_field_goal,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("FT: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_one_points_leader_free_throw,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(
-                                height: 80,
-                                child: VerticalDivider(
-                                  color: Colors.grey[300],
-                                  thickness: 1,
-                                  width: 32,
+                                    ),
+                                  ],
                                 ),
-                              ),
 
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Text("PTS: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_two_points_leader_points,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                                SizedBox(
+                                  height: 20,
+                                  child: VerticalDivider(
+                                    color: const Color.fromARGB(
+                                      255,
+                                      159,
+                                      159,
+                                      159,
+                                    ),
+                                    thickness: 1,
+                                    //width: 32,
                                   ),
+                                ),
 
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("FG: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_two_points_leader_field_goal,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                Row(
+                                  children: [
+                                    const Text("FG: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_points_leader_field_goals,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(
+                                  height: 20,
+                                  child: VerticalDivider(
+                                    color: const Color.fromARGB(
+                                      255,
+                                      159,
+                                      159,
+                                      159,
+                                    ),
+                                    thickness: 1,
+                                    //width: 32,
                                   ),
+                                ),
 
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("FT: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_two_points_leader_free_throw,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                Row(
+                                  children: [
+                                    const Text("FT: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_points_leader_free_throw,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(width: 10),
-
-                        Column(
-                          children: [
-                            Image.network(
-                              widget.game.team_two_points_leader_imag,
-                              width: 60,
-                              height: 60,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Icon(
-                                  Icons.person,
-                                  size: 50,
-                                  color: Colors.grey[600],
-                                );
-                              },
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
 
-                            Text(
-                              widget.game.team_two_points_leader_name,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                            SizedBox(height: 10),
+
+                            SizedBox(
+                              height: 20,
+                              child: const Divider(
+                                color: const Color.fromARGB(255, 159, 159, 159),
+                                thickness: 1,
+                              ),
+                            ),
+
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Column(
+                                children: [
+                                  Image.network(
+                                    widget.game.team_two_points_leader_image,
+                                    width: 67,
+                                    height: 70,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.person,
+                                        size: 50,
+                                        color: Colors.grey[600],
+                                      );
+                                    },
+                                  ),
+
+                                  Text(
+                                    widget.game.team_two_points_leader_name,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 10),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Text("PTS: "),
+                                          Text(
+                                            widget
+                                                .game
+                                                .team_two_points_leader_points,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                      SizedBox(
+                                        height: 20,
+                                        child: VerticalDivider(
+                                          color: const Color.fromARGB(
+                                            255,
+                                            159,
+                                            159,
+                                            159,
+                                          ),
+                                          thickness: 1,
+                                          //width: 32,
+                                        ),
+                                      ),
+
+                                      Row(
+                                        children: [
+                                          const Text("FG: "),
+                                          Text(
+                                            widget
+                                                .game
+                                                .team_two_points_leader_field_goals,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                      SizedBox(
+                                        height: 20,
+                                        child: VerticalDivider(
+                                          color: const Color.fromARGB(
+                                            255,
+                                            159,
+                                            159,
+                                            159,
+                                          ),
+                                          thickness: 1,
+                                          //width: 32,
+                                        ),
+                                      ),
+
+                                      Row(
+                                        children: [
+                                          const Text("FT: "),
+                                          Text(
+                                            widget
+                                                .game
+                                                .team_two_points_leader_free_throw,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -590,9 +648,13 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[200]!),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 152, 152, 152),
+                  ),
                   borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
                 ),
+
                 child: Column(
                   children: [
                     const Text(
@@ -605,14 +667,14 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
 
                     const SizedBox(height: 10),
 
-                    Row(
+                    Column(
                       children: [
                         Column(
                           children: [
                             Image.network(
-                              widget.game.team_one_rebound_leader_image,
-                              width: 60,
-                              height: 60,
+                              widget.game.team_one_rebounds_leader_image,
+                              width: 70,
+                              height: 70,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
                                   Icons.person,
@@ -623,147 +685,202 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                             ),
 
                             Text(
-                              widget.game.team_one_rebound_leader_name,
+                              widget.game.team_one_rebounds_leader_name,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
 
-                        SizedBox(width: 10),
+                            SizedBox(height: 10),
 
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Text("REB: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_one_rebound_leader_rebound,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text("REB: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_rebounds_leader_rebounds,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
-
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("DREB: "),
-                                      Text(
-                                        widget.game.team_one_defensive_rebound,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("OREB: "),
-                                      Text(
-                                        widget.game.team_one_offensive_rebound,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(
-                                height: 80,
-                                child: VerticalDivider(
-                                  color: Colors.grey[300],
-                                  thickness: 1,
-                                  width: 32,
+                                    ),
+                                  ],
                                 ),
+
+                                SizedBox(
+                                  height: 20,
+                                  child: VerticalDivider(
+                                    color: const Color.fromARGB(
+                                      255,
+                                      159,
+                                      159,
+                                      159,
+                                    ),
+                                    thickness: 1,
+                                    //width: 32,
+                                  ),
+                                ),
+
+                                Row(
+                                  children: [
+                                    const Text("DREB: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_rebounds_leader_defensive_rebounds,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(
+                                  height: 20,
+                                  child: VerticalDivider(
+                                    color: const Color.fromARGB(
+                                      255,
+                                      159,
+                                      159,
+                                      159,
+                                    ),
+                                    thickness: 1,
+                                    //width: 32,
+                                  ),
+                                ),
+
+                                Row(
+                                  children: [
+                                    const Text("OREB: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_rebounds_leader_offensive_rebounds,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 10),
+
+                            SizedBox(
+                              height: 20,
+                              child: const Divider(
+                                color: const Color.fromARGB(255, 159, 159, 159),
+                                thickness: 1,
                               ),
+                            ),
 
-                              Column(
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Column(
                                 children: [
-                                  Row(
-                                    children: [
-                                      const Text("REB: "),
-                                      Text(
-                                        widget
-                                            .game
-                                            .team_two_rebound_leader_rebound,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                                  Image.network(
+                                    widget.game.team_two_rebounds_leader_image,
+                                    width: 67,
+                                    height: 70,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.person,
+                                        size: 50,
+                                        color: Colors.grey[600],
+                                      );
+                                    },
                                   ),
 
-                                  const SizedBox(height: 5),
-
-                                  Row(
-                                    children: [
-                                      const Text("DREB: "),
-                                      Text(
-                                        widget.game.team_two_defensive_rebound,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    widget.game.team_two_points_leader_name,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
 
-                                  const SizedBox(height: 5),
+                                  SizedBox(height: 10),
 
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Text("OREB: "),
-                                      Text(
-                                        widget.game.team_two_offensive_rebound,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                      Row(
+                                        children: [
+                                          const Text("REB: "),
+                                          Text(
+                                            widget
+                                                .game
+                                                .team_two_rebounds_leader_rebounds,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                      SizedBox(
+                                        height: 20,
+                                        child: VerticalDivider(
+                                          color: const Color.fromARGB(
+                                            255,
+                                            159,
+                                            159,
+                                            159,
+                                          ),
+                                          thickness: 1,
+                                          //width: 32,
                                         ),
+                                      ),
+
+                                      Row(
+                                        children: [
+                                          const Text("DREB: "),
+                                          Text(
+                                            widget
+                                                .game
+                                                .team_two_rebounds_leader_defensive_rebounds,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                      SizedBox(
+                                        height: 20,
+                                        child: VerticalDivider(
+                                          color: const Color.fromARGB(
+                                            255,
+                                            159,
+                                            159,
+                                            159,
+                                          ),
+                                          thickness: 1,
+                                          //width: 32,
+                                        ),
+                                      ),
+
+                                      Row(
+                                        children: [
+                                          const Text("OREB: "),
+                                          Text(
+                                            widget
+                                                .game
+                                                .team_two_rebounds_leader_offensive_rebounds,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ],
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(width: 10),
-
-                        Column(
-                          children: [
-                            Image.network(
-                              widget.game.team_two_rebound_leader_image,
-                              width: 60,
-                              height: 60,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Icon(
-                                  Icons.person,
-                                  size: 50,
-                                  color: Colors.grey[600],
-                                );
-                              },
-                            ),
-
-                            Text(
-                              widget.game.team_two_rebound_leader_name,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -773,106 +890,148 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                   ],
                 ),
               ),
+            ],
+          ),
 
-              SizedBox(height: 10),
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey[200]!),
-                      borderRadius: BorderRadius.circular(10),
+          SizedBox(height: 10),
+
+          Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 152, 152, 152),
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+
+                child: Column(
+                  children: [
+                    const Text(
+                      "Assists Leader",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    child: Column(
+
+                    const SizedBox(height: 10),
+
+                    Column(
                       children: [
-                        const Text(
-                          "Assists Leader",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        Row(
+                        Column(
                           children: [
-                            Column(
+                            Image.network(
+                              widget.game.team_one_assists_leader_image,
+                              width: 70,
+                              height: 70,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Colors.grey[600],
+                                );
+                              },
+                            ),
+
+                            Text(
+                              widget.game.team_one_assists_leader_name,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.network(
-                                  widget.game.team_one_assist_leader_image,
-                                  width: 60,
-                                  height: 60,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Icon(
-                                      Icons.person,
-                                      size: 50,
-                                      color: Colors.grey[600],
-                                    );
-                                  },
+                                Row(
+                                  children: [
+                                    const Text("AST: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_assists_leader_assists,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
 
-                                Text(
-                                  widget.game.team_one_assist_leader_name,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                                SizedBox(
+                                  height: 20,
+                                  child: VerticalDivider(
+                                    color: const Color.fromARGB(
+                                      255,
+                                      159,
+                                      159,
+                                      159,
+                                    ),
+                                    thickness: 1,
+                                    //width: 32,
                                   ),
+                                ),
+
+                                Row(
+                                  children: [
+                                    const Text("TO: "),
+                                    Text(
+                                      widget
+                                          .game
+                                          .team_one_assists_leader_turnovers,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
 
-                            SizedBox(width: 10),
+                            SizedBox(height: 10),
 
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                            SizedBox(
+                              height: 20,
+                              child: const Divider(
+                                color: const Color.fromARGB(255, 159, 159, 159),
+                                thickness: 1,
+                              ),
+                            ),
+
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Column(
                                 children: [
-                                  Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Text("AST: "),
-                                          Text(
-                                            widget
-                                                .game
-                                                .team_one_assist_leader_assist,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                      const SizedBox(height: 5),
-
-                                      Row(
-                                        children: [
-                                          const Text("TO: "),
-                                          Text(
-                                            widget
-                                                .game
-                                                .team_one_assist_leader_turnover,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                  Image.network(
+                                    widget.game.team_two_assists_leader_image,
+                                    width: 67,
+                                    height: 70,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.person,
+                                        size: 50,
+                                        color: Colors.grey[600],
+                                      );
+                                    },
                                   ),
 
-                                  SizedBox(
-                                    height: 80,
-                                    child: VerticalDivider(
-                                      color: Colors.grey[300],
-                                      thickness: 1,
-                                      width: 32,
+                                  Text(
+                                    widget.game.team_two_points_leader_name,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
 
-                                  Column(
+                                  SizedBox(height: 10),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Row(
                                         children: [
@@ -880,7 +1039,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                                           Text(
                                             widget
                                                 .game
-                                                .team_two_assist_leader_assist,
+                                                .team_two_assists_leader_assists,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -888,7 +1047,19 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                                         ],
                                       ),
 
-                                      const SizedBox(height: 5),
+                                      SizedBox(
+                                        height: 20,
+                                        child: VerticalDivider(
+                                          color: const Color.fromARGB(
+                                            255,
+                                            159,
+                                            159,
+                                            159,
+                                          ),
+                                          thickness: 1,
+                                          //width: 32,
+                                        ),
+                                      ),
 
                                       Row(
                                         children: [
@@ -896,7 +1067,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                                           Text(
                                             widget
                                                 .game
-                                                .team_two_assist_leader_turnover,
+                                                .team_two_assists_leader_turnovers,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -908,39 +1079,12 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                                 ],
                               ),
                             ),
-
-                            SizedBox(width: 10),
-
-                            Column(
-                              children: [
-                                Image.network(
-                                  widget.game.team_two_assist_leader_image,
-                                  width: 60,
-                                  height: 60,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Icon(
-                                      Icons.person,
-                                      size: 50,
-                                      color: Colors.grey[600],
-                                    );
-                                  },
-                                ),
-
-                                Text(
-                                  widget.game.team_two_points_leader_name,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -951,7 +1095,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
 
   Widget _buildStatisticsSection() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.grey[50],
         borderRadius: BorderRadius.circular(16),
@@ -973,7 +1117,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
             children: [
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       widget.game.team_one_name,
@@ -985,19 +1129,23 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                     const SizedBox(height: 12),
                     _buildStatRow(
                       label: 'FG %',
-                      value: widget.game.team_one_field_goal_percentage,
+                      value: widget.game.team_one_fg_pct,
                     ),
                     _buildStatRow(
                       label: '3PT %',
-                      value: widget.game.team_one_three_points_percentage,
+                      value: widget.game.team_one_3pt_pct,
                     ),
                     _buildStatRow(
                       label: 'Turnovers',
                       value: widget.game.team_one_turnovers,
                     ),
                     _buildStatRow(
-                      label: 'Rebounds',
-                      value: widget.game.team_one_rebound,
+                      label: 'Offensive Rebounds',
+                      value: widget.game.team_one_o_rebounds,
+                    ),
+                    _buildStatRow(
+                      label: 'Defensive Rebounds',
+                      value: widget.game.team_one_o_rebounds,
                     ),
                   ],
                 ),
@@ -1014,7 +1162,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
 
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       widget.game.team_two_name,
@@ -1026,19 +1174,23 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
                     const SizedBox(height: 12),
                     _buildStatRow(
                       label: 'FG %',
-                      value: widget.game.team_two_field_goal_percentage,
+                      value: widget.game.team_two_fg_pct,
                     ),
                     _buildStatRow(
                       label: '3PT %',
-                      value: widget.game.team_two_three_points_percentage,
+                      value: widget.game.team_two_3pt_pct,
                     ),
                     _buildStatRow(
                       label: 'Turnovers',
                       value: widget.game.team_two_turnovers,
                     ),
                     _buildStatRow(
-                      label: 'Rebounds',
-                      value: widget.game.team_two_rebound,
+                      label: 'Offensive Rebounds',
+                      value: widget.game.team_two_o_rebounds,
+                    ),
+                    _buildStatRow(
+                      label: 'Defensive Rebounds',
+                      value: widget.game.team_two_o_rebounds,
                     ),
                   ],
                 ),
@@ -1050,152 +1202,6 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
     );
   }
 
-  // Widget _buildLeaderCard({
-  //   required String title,
-  //   required String teamOneImage,
-  //   required String teamOneName,
-  //   required String teamOnePrimaryStat,
-  //   required List<String> teamOneSecondaryStatsOne,
-  //   required List<String> teamOneSecondaryStats,
-  //   required String teamTwoImage,
-  //   required String teamTwoName,
-  //   required String teamTwoPrimaryStat,
-  //   required List<String> teamTwoSecondaryStats,
-  // }) {
-  //   return Container(
-  //     padding: const EdgeInsets.all(16),
-  //     decoration: BoxDecoration(
-  //       border: Border.all(color: Colors.grey[200]!),
-  //       borderRadius: BorderRadius.circular(12),
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           title,
-  //           style: const TextStyle(
-  //             fontSize: 15,
-  //             fontWeight: FontWeight.w600,
-  //             color: Colors.black87,
-  //           ),
-  //         ),
-  //         const SizedBox(height: 12),
-  //         Row(
-  //           children: [
-  //             _buildLeaderInfo(
-  //               image: teamOneImage,
-  //               name: teamOneName,
-  //               primaryStat: teamOnePrimaryStat,
-  //               secondaryStats: teamOneSecondaryStats,
-  //               alignment: CrossAxisAlignment.start,
-  //             ),
-  //             const SizedBox(width: 16),
-  //             // Expanded(
-  //             //   child: Column(
-  //             //     children: [
-  //             //       Text(
-  //             //         teamOnePrimaryStat,
-  //             //         style: const TextStyle(
-  //             //           fontSize: 16,
-  //             //           fontWeight: FontWeight.bold,
-  //             //         ),
-  //             //       ),
-  //             //       const SizedBox(height: 4),
-  //             //       Text('vss', style: TextStyle(color: Colors.grey[500])),
-  //             //       const SizedBox(height: 4),
-  //             //       Text(
-  //             //         teamTwoPrimaryStat,
-  //             //         style: const TextStyle(
-  //             //           fontSize: 16,
-  //             //           fontWeight: FontWeight.bold,
-  //             //         ),
-  //             //       ),
-  //             //     ],
-  //             //   ),
-  //             // ),
-  //             const SizedBox(width: 16),
-  //             _buildLeaderInfo(
-  //               image: teamTwoImage,
-  //               name: teamTwoName,
-  //               primaryStat: teamTwoPrimaryStat,
-  //               secondaryStats: teamTwoSecondaryStats,
-  //               alignment: CrossAxisAlignment.end,
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildLeaderInfo({
-  //   required String image,
-  //   required String name,
-  //   required String primaryStat,
-  //   required List<String> secondaryStats,
-  //   required CrossAxisAlignment alignment,
-  // }) {
-  //   return Column(
-  //     crossAxisAlignment: alignment,
-  //     children: [
-  //       ClipOval(
-  //         child: SizedBox(
-  //           width: 60,
-  //           height: 60,
-  //           child: image.isNotEmpty
-  //               ? Image.network(
-  //                   image,
-  //                   fit: BoxFit.cover,
-  //                   errorBuilder: (context, error, stackTrace) {
-  //                     return Icon(
-  //                       Icons.person,
-  //                       size: 40,
-  //                       color: Colors.grey[500],
-  //                     );
-  //                   },
-  //                 )
-  //               : Icon(Icons.person, size: 40, color: Colors.grey[500]),
-  //         ),
-  //       ),
-  //       const SizedBox(height: 8),
-  //       SizedBox(
-  //         width: 120,
-  //         child: Text(
-  //           name,
-  //           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-  //           maxLines: 1,
-  //           overflow: TextOverflow.ellipsis,
-  //           textAlign: alignment == CrossAxisAlignment.start
-  //               ? TextAlign.left
-  //               : TextAlign.right,
-  //         ),
-  //       ),
-  //       const SizedBox(height: 4),
-  //       Text(
-  //         primaryStat,
-  //         style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-  //         textAlign: alignment == CrossAxisAlignment.start
-  //             ? TextAlign.left
-  //             : TextAlign.right,
-  //       ),
-  //       const SizedBox(height: 2),
-  //       ...secondaryStats.map(
-  //         (stat) => SizedBox(
-  //           width: 120,
-  //           child: Text(
-  //             stat,
-  //             style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-  //             textAlign: alignment == CrossAxisAlignment.start
-  //                 ? TextAlign.left
-  //                 : TextAlign.right,
-  //             overflow: TextOverflow.ellipsis,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
   Widget _buildStatRow({required String label, required String value}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -1205,7 +1211,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
           Text(label, style: TextStyle(fontSize: 13, color: Colors.grey[700])),
           Text(
             value,
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -1273,7 +1279,7 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
   }
 
   Map<String, dynamic> _parseGameStatus() {
-    final status = widget.game.game_status.trim();
+    final status = widget.game.game_time.trim();
     if (status.isEmpty) {
       return {
         'quarter': 1,
@@ -1306,11 +1312,18 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
     int quarter = 1;
     String time = '';
 
-    final timeMatch = RegExp(r'(\d+:\d{2})').firstMatch(status);
+    // Match time formats: "6:56" or "0.0" (with colon or period)
+    final timeMatch = RegExp(r'(\d+)[:.](\d+)').firstMatch(status);
     if (timeMatch != null) {
-      time = timeMatch.group(1) ?? '';
+      final minutes = timeMatch.group(1) ?? '0';
+      final seconds = timeMatch.group(2) ?? '0';
+      // Format seconds to always be 2 digits (e.g., "0" -> "00")
+      final secondsFormatted = seconds.length == 1 ? '0$seconds' : seconds;
+      time = '$minutes:$secondsFormatted';
     }
 
+    // Try to match quarter in various formats
+    // First try: "qtr", "quarter", "q" followed by number
     final quarterMatch = RegExp(
       r'(?:qtr|quarter|q)\s*(\d+)',
       caseSensitive: false,
@@ -1318,8 +1331,9 @@ class _NbaGameDetailModalState extends State<NbaGameDetailModal>
     if (quarterMatch != null) {
       quarter = int.tryParse(quarterMatch.group(1) ?? '') ?? quarter;
     } else {
+      // Second try: ordinal numbers like "3rd", "2nd", "1st", "4th" (standalone or after dash)
       final ordinalMatch = RegExp(
-        r'(\d+)(?:st|nd|rd|th)\s+quarter',
+        r'(\d+)(?:st|nd|rd|th)',
         caseSensitive: false,
       ).firstMatch(status);
       if (ordinalMatch != null) {

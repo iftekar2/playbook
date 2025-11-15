@@ -98,12 +98,13 @@ class _GameCard extends StatelessWidget {
           ),
         ],
       ),
+
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _GameStatusSection(status: game.game_status),
+            _GameStatusSection(status: game.game_time),
             _TeamSection(
               logo: game.team_one_logo,
               name: game.team_one_name,
